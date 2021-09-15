@@ -13,6 +13,6 @@
     </Button>
     <TextBox AcceptsReturn="True"
               Text="{Binding Description}"
-              Watermark="Enter your TODO"/>    
+              Watermark="Enter your TODO"/>
   </DockPanel>
 </UserControl>
