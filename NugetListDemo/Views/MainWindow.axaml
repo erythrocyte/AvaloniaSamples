@@ -4,6 +4,20 @@
         x:Class="NugetListDemo.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Width="900" Height="500"
-        Title="Nuget List Demo"
-        Content="{Binding Content}">
+        Title="{Binding Title}">
+
+
+        <DockPanel>
+                <Menu DockPanel.Dock="Top">
+                        <MenuItem Header="_File">
+                                <MenuItem Header="_Close"/>
+                        </MenuItem>
+                        <MenuItem Header="_Help">
+                                <MenuItem Header="About"/>
+                                <MenuItem Header="About _Avalonia"/>
+                        </MenuItem>
+                </Menu>
+                <Grid>
+                </Grid>
+        </DockPanel>
 </Window>
