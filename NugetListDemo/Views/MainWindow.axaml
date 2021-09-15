@@ -14,7 +14,11 @@
                         </MenuItem>
                         <MenuItem Header="_Help">
                                 <MenuItem Header="About"/>
-                                <MenuItem Header="About _Avalonia"/>
+                                <MenuItem Header="About _Avalonia" Command="{Binding AboutAvaloniaCommand}">
+                                        <!-- <MenuItem.Icon>
+                                                <Image Source="resm:MyApp.Assets.Open.png"/>
+                                        </MenuItem.Icon> -->
+                                </MenuItem>
                         </MenuItem>
                 </Menu>
                 <Grid>

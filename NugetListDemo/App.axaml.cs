@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using NugetListDemo.Views;
 using NugetListDemo.ViewModels;
+using MessageBox.Avalonia;
 
 namespace NugetListDemo
 {
@@ -18,11 +19,11 @@ namespace NugetListDemo
             base.OnFrameworkInitializationCompleted();
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {                
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainWindowViewModel(),
-                };
+            {
+                var vm = new MainWindowViewModel();
+                vm.OnGetView += () => { return desktop.MainWindow; };
+                desktop.MainWindow = new MainWindow();
+                desktop.MainWindow.DataContext = vm;
             }
 
             base.OnFrameworkInitializationCompleted();
