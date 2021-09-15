@@ -5,6 +5,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using ReactiveUI;
+using MessageBox.Avalonia;
+using MessageBox.Avalonia.DTO;
+using MessageBox.Avalonia.Enums;
 
 namespace NugetListDemo.ViewModels
 {
@@ -12,8 +15,7 @@ namespace NugetListDemo.ViewModels
     {
         public MainWindowViewModel()
         {
-            var avaVersion = Assembly.GetAssembly(typeof(Avalonia.AvaloniaLocator))?.GetName()?.Version?.ToString() ?? string.Empty;
-            Title = $"Nuget List Demo [avalonia: { avaVersion }]";
+            Title = $"Nuget List Demo v0.1";
 
             AboutAvaloniaCommand = ReactiveCommand.CreateFromTask(AboutAvalonia);
         }
@@ -22,30 +24,38 @@ namespace NugetListDemo.ViewModels
 
         public ReactiveCommand<Unit, Unit> AboutAvaloniaCommand { get; }
 
-        [AllowNull]
-        public Func<Window> OnGetView;
-
         private async Task AboutAvalonia()
         {
-            // var msBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
-            //     .GetMessageBoxStandardWindow(new MessageBoxStandardParams
-            //     {
-            //         ButtonDefinitions = ButtonEnum.OkAbort,
-            //         ContentTitle = "Title",
-            //         ContentMessage = "Message",
-            //         Icon = Icon.Plus,
-            //         Style = Style.UbuntuLinux
-            //     });
-            var view = OnGetView?.Invoke();
-            // var result = await dialog.ShowAsync(null);
+            var msBoxStandardWindow = MessageBoxManager
+                .GetMessageBoxStandardWindow(new MessageBoxStandardParams
+                {
+                    ButtonDefinitions = ButtonEnum.Ok,
+                    ContentTitle = "Title",
+                    ContentMessage = GetContentAboutAvalonia(),
+                    Icon = Icon.Info,
+                    Style = Style.Windows
+                });
+            var result = await msBoxStandardWindow.Show();
+        }
 
-            // if (result != null)
-            // {
-            //     foreach (var path in result)
-            //     {
-            //         System.Diagnostics.Debug.WriteLine($"Opened: {path}");
-            //     }
-            // }
+        private string GetAvaloniaVersion()
+        {
+            return Assembly.GetAssembly(typeof(Avalonia.AvaloniaLocator))?.GetName()?.Version?.ToString() ?? string.Empty;
+        }
+
+        private string GetContentAboutAvalonia()
+        {
+            return string.Concat(
+                "Avalonia is a cross-platform XAML-based UI framework " + Environment.NewLine +
+                "providing a flexible styling system and supporting a wide range of " + Environment.NewLine +
+                "Operating Systems such as Windows via .NET Framework and " + Environment.NewLine +
+                ".NET Core, Linux via Xorg, macOS",
+                Environment.NewLine,
+                "More information at: https://avaloniaui.net/",
+                Environment.NewLine,
+                Environment.NewLine,
+                $"Avalonia version { GetAvaloniaVersion() }"
+            );
         }
     }
 
