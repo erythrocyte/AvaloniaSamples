@@ -15,7 +15,7 @@ namespace NugetListDemo.ViewModels
     {
         public MainWindowViewModel()
         {
-            Title = $"Nuget List Demo v0.1";
+            Title = $"Nuget List Demo { ProgramVersion.Invoke() }";
 
             AboutAvaloniaCommand = ReactiveCommand.CreateFromTask(AboutAvalonia);
         }
@@ -24,7 +24,7 @@ namespace NugetListDemo.ViewModels
 
         public ReactiveCommand<Unit, Unit> AboutAvaloniaCommand { get; }
 
-        [DisallowNull]
+        [MaybeNull]
         public Func<Window> GetWindow;
 
         private async Task AboutAvalonia()
@@ -41,7 +41,7 @@ namespace NugetListDemo.ViewModels
                     Icon = Icon.Info,
                     Style = Style.Windows
                 });
-            var window = GetWindow.Invoke();
+            var window = GetWindow?.Invoke();
             var result = await msBoxStandardWindow.ShowDialog(window);
         }
 
@@ -62,6 +62,12 @@ namespace NugetListDemo.ViewModels
                 "For more information see the https://avaloniaui.net/"
             );
         }
+
+        private Func<string> ProgramVersion = () =>
+        {
+            // todo: from resouce file;
+            return "v0.1";
+        };
     }
 
 }
