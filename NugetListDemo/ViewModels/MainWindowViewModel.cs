@@ -24,18 +24,25 @@ namespace NugetListDemo.ViewModels
 
         public ReactiveCommand<Unit, Unit> AboutAvaloniaCommand { get; }
 
+        [DisallowNull]
+        public Func<Window> GetWindow;
+
         private async Task AboutAvalonia()
         {
             var msBoxStandardWindow = MessageBoxManager
                 .GetMessageBoxStandardWindow(new MessageBoxStandardParams
                 {
                     ButtonDefinitions = ButtonEnum.Ok,
-                    ContentTitle = "Title",
+                    ContentTitle = "About avalonia",
                     ContentMessage = GetContentAboutAvalonia(),
+                    ShowInCenter = true,
+                    ContentHeader = $"Avalonia version { GetAvaloniaVersion() }",
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     Icon = Icon.Info,
                     Style = Style.Windows
                 });
-            var result = await msBoxStandardWindow.Show();
+            var window = GetWindow.Invoke();
+            var result = await msBoxStandardWindow.ShowDialog(window);
         }
 
         private string GetAvaloniaVersion()
@@ -51,10 +58,8 @@ namespace NugetListDemo.ViewModels
                 "Operating Systems such as Windows via .NET Framework and " + Environment.NewLine +
                 ".NET Core, Linux via Xorg, macOS",
                 Environment.NewLine,
-                "More information at: https://avaloniaui.net/",
                 Environment.NewLine,
-                Environment.NewLine,
-                $"Avalonia version { GetAvaloniaVersion() }"
+                "For more information see the https://avaloniaui.net/"
             );
         }
     }
