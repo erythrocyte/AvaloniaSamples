@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Transactions;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -22,10 +23,12 @@ namespace NugetListDemo
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow();
+                var mainWindow = new MainWindow();
                 var vm = new MainWindowViewModel();
-                vm.GetWindow += () => desktop.MainWindow;
-                desktop.MainWindow.DataContext = vm;
+                mainWindow.DataContext = vm;
+                mainWindow.Subscribe();
+
+                desktop.MainWindow = mainWindow;
             }
 
             base.OnFrameworkInitializationCompleted();

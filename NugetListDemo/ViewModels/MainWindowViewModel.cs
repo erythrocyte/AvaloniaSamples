@@ -8,6 +8,7 @@ using ReactiveUI;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
+using MessageBox.Avalonia.BaseWindows.Base;
 
 namespace NugetListDemo.ViewModels
 {
@@ -18,14 +19,19 @@ namespace NugetListDemo.ViewModels
             Title = $"Nuget List Demo { ProgramVersion.Invoke() }";
 
             AboutAvaloniaCommand = ReactiveCommand.CreateFromTask(AboutAvalonia);
+            CloseExecutableCommand = ReactiveCommand.Create(CloseExecutable);
         }
 
         public string Title { get; }
 
         public ReactiveCommand<Unit, Unit> AboutAvaloniaCommand { get; }
+        public ReactiveCommand<Unit, Unit> CloseExecutableCommand { get; }
 
         [MaybeNull]
-        public Func<Window> GetWindow;
+        public Func<IMsBoxWindow<ButtonResult>, Task> OnShowMessageBox;
+
+        [DisallowNull]
+        public Action OnCloseExecutable;
 
         private async Task AboutAvalonia()
         {
@@ -41,8 +47,7 @@ namespace NugetListDemo.ViewModels
                     Icon = Icon.Info,
                     Style = Style.Windows
                 });
-            var window = GetWindow?.Invoke();
-            var result = await msBoxStandardWindow.ShowDialog(window);
+            await OnShowMessageBox?.Invoke(msBoxStandardWindow);
         }
 
         private string GetAvaloniaVersion()
@@ -68,6 +73,11 @@ namespace NugetListDemo.ViewModels
             // todo: from resouce file;
             return "v0.1";
         };
+
+        private void CloseExecutable()
+        {
+            OnCloseExecutable?.Invoke();
+        }
     }
 
 }
