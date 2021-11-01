@@ -1,27 +1,38 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:views="clr-namespace:NugetListDemo.Views"
-        x:Class="NugetListDemo.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Width="900" Height="500"
-        Title="{Binding Title}">
+        xmlns:views="clr-namespace:NugetListDemo.Views" x:Class="NugetListDemo.Views.MainWindow" Icon="/Assets/avalonia-logo.ico" Width="900" Height="500" Title="{Binding Title}">
 
-
-        <DockPanel>
-                <Menu DockPanel.Dock="Top">
-                        <MenuItem Header="_File">
-                                <MenuItem Header="_Close" Command="{Binding CloseExecutableCommand}"/>
-                        </MenuItem>
-                        <MenuItem Header="_Help">
-                                <MenuItem Header="About"/>
-                                <MenuItem Header="About _Avalonia" Command="{Binding AboutAvaloniaCommand}">
-                                        <!-- <MenuItem.Icon>
-                                                <Image Source="resm:MyApp.Assets.Open.png"/>
-                                        </MenuItem.Icon> -->
+        <Grid Margin="12">
+                <DockPanel Grid.Row="0">
+                        <Menu DockPanel.Dock="Top">
+                                <MenuItem Header="_File">
+                                        <MenuItem Header="_Close" Command="{Binding CloseExecutableCommand}"/>
                                 </MenuItem>
-                        </MenuItem>
-                </Menu>
-                <Grid>
-                </Grid>
-        </DockPanel>
+                                <MenuItem Header="_Help">
+                                        <MenuItem Header="About"/>
+                                        <MenuItem Header="About _Avalonia" Command="{Binding AboutAvaloniaCommand}">
+                                                <!-- <MenuItem.Icon>
+                                                        <Image Source="resm:MyApp.Assets.Open.png"/>
+                                                </MenuItem.Icon> -->
+                                        </MenuItem>
+                                </MenuItem>
+                        </Menu>
+                </DockPanel>
+
+                <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock FontSize="16" Grid.Row="1" Grid.Column="0" FontWeight="SemiBold" VerticalAlignment="Center" Text="Search for: "/>
+                <TextBox x:Name="searchTextBox" Grid.Column="1" Grid.Row="1" Margin="6 0 0 0"/>
+                <ListBox x:Name="searchResultsListBox" Grid.ColumnSpan="3" 
+                        Grid.Row="2" Margin="0,6,0,0"/>
+
+        </Grid>
 </Window>
