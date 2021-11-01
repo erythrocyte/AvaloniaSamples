@@ -12,6 +12,30 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open.."/>
+            </MenuItem>
+        </Menu>
+
+        <ScrollViewer DockPanel.Dock="Right" Margin="12 12 6 12">
+            <ItemsControl Items="{Binding FileNames}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Path=.}"
+                                HorizontalAlignment="Stretch"
+                                Margin="2" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <DockPanel>
+            <Slider DockPanel.Dock="Bottom">
+            </Slider>
+        </DockPanel>
+
+    </DockPanel>
 
 </Window>

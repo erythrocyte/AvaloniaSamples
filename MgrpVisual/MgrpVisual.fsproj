@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
@@ -9,9 +9,15 @@
     <None Remove=".gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ScatterLineModel.fs" />
+    
+    <Compile Include="Services\FileThreeReaderService.fs" />    
+
     <Compile Include="ViewModels\ViewModelBase.fs" />
     <Compile Include="ViewModels\MainWindowViewModel.fs" />
+
     <Compile Include="Views\MainWindow.axaml.fs" />
+
     <Compile Include="ViewLocator.fs" />
     <Compile Include="App.axaml.fs" />
     <Compile Include="Program.fs" />
