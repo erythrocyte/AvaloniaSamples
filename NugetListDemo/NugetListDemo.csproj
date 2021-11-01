@@ -14,5 +14,6 @@
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.7" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.7" />
     <PackageReference Include="MessageBox.Avalonia" Version="1.5.1" />
+    <PackageReference Include="NuGet.Protocol" Version="5.11.0" />
   </ItemGroup>
 </Project>
