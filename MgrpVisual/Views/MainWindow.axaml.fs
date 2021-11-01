@@ -14,3 +14,8 @@ type MainWindow () as this =
         this.AttachDevTools()
 #endif
         AvaloniaXamlLoader.Load(this)
+
+    member private this.PrepareSlider() = 
+        let slider = this.FindControl<Slider>("Slider")
+        slider.
+
