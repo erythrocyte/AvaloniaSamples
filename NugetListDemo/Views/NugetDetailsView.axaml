@@ -1,20 +1,29 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:views="clr-namespace:NugetListDemo.Views" x:Class="NugetListDemo.Views.NugetDetailsView" Width="900" Height="500" Title="{Binding Title}">
+        xmlns:views="clr-namespace:NugetListDemo.Views" x:Class="NugetListDemo.Views.NugetDetailsView">
 
-        <Grid>
+        <Window.Styles>
+                <Style Selector="Button.LinkButton">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Padding" Value="0"/>
+                </Style>
+        </Window.Styles>
+
+        <Grid Margin="4">
                 <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image x:Name="iconImage" Margin="6" Width="64" Height="64" HorizontalAlignment="Center" VerticalAlignment="Center"
-                Content="{Binding IconUrl}"/>
-                <TextBlock Grid.Column="1" TextWrapping="WrapWithOverflow" Margin="6" VerticalAlignment="Center">
-                        <TextBox FontSize="14" FontWeight="SemiBold" x:Name="titleRun" Content="{Binding Title}"/>
-                        <LineBreak />
-                        <TextBox FontSize="12" x:Name="descriptionRun" Content="{Binding Description}"/>
-                        <LineBreak />
-                        <Hyperlink x:Name="openButton" Command = "{Binding OpenPageCommand}" >Open</Hyperlink>
-                </TextBlock>
+                <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Image x:Name="iconImage" Margin="6" Width="64" Height="64" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="3" Source="{Binding NugetImage}"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" TextWrapping="WrapWithOverflow" Margin="6" VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold" x:Name="titleRun" Text="{Binding Title}"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="WrapWithOverflow" Margin="6" VerticalAlignment="Center" FontSize="12" x:Name="descriptionRun" Text="{Binding Description}"/>
+                <Button Grid.Column="1" Grid.Row="2" Margin="6" VerticalAlignment="Center" x:Name="openButton" Content="Open" Command = "{Binding OpenPageCommand}"/>
         </Grid>
 </Window>

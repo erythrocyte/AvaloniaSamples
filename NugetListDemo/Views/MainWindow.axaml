@@ -30,9 +30,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock FontSize="16" Grid.Row="1" Grid.Column="0" FontWeight="SemiBold" VerticalAlignment="Center" Text="Search for: "/>
-                <TextBox x:Name="searchTextBox" Grid.Column="1" Grid.Row="1" Margin="6 0 0 0"/>
-                <ListBox x:Name="searchResultsListBox" Grid.ColumnSpan="3" 
-                        Grid.Row="2" Margin="0,6,0,0"/>
-
+                <TextBox x:Name="searchTextBox" Grid.Column="1" Grid.Row="1" Margin="6 0 0 0" Text="{Binding SearchTerm}"/>
+                <ListBox x:Name="searchResultsListBox" Grid.ColumnSpan="3" Grid.Row="2" Margin="0,6,0,0" Items="{Binding SearchResults}"/>
         </Grid>
 </Window>
