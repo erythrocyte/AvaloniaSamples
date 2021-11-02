@@ -16,6 +16,7 @@ using NuGet.Common;
 using NuGet.Configuration;
 using System.Linq;
 using System.Reactive.Linq;
+using NugetListDemo.Views;
 
 namespace NugetListDemo.ViewModels
 {
@@ -40,8 +41,8 @@ namespace NugetListDemo.ViewModels
         // class subscribes to an Observable and stores a copy of the latest value.
         // It also runs an action whenever the property changes, usually calling
         // ReactiveObject's RaisePropertyChanged.
-        private readonly ObservableAsPropertyHelper<IEnumerable<NugetDetailsViewModel>> _searchResults;
-        public IEnumerable<NugetDetailsViewModel> SearchResults => _searchResults.Value;
+        private readonly ObservableAsPropertyHelper<IEnumerable<NugetDetailsView>> _searchResults;
+        public IEnumerable<NugetDetailsView> SearchResults => _searchResults.Value;
 
         // Here, we want to create a property to represent when the application 
         // is performing a search (i.e. when to show the "spinner" control that 
@@ -138,7 +139,7 @@ namespace NugetListDemo.ViewModels
             OnCloseExecutable?.Invoke();
         }
 
-        private async Task<IEnumerable<NugetDetailsViewModel>> SearchNuGetPackages(
+        private async Task<IEnumerable<NugetDetailsView>> SearchNuGetPackages(
     string term, CancellationToken token)
         {
             var providers = new List<Lazy<INuGetResourceProvider>>();
@@ -150,7 +151,13 @@ namespace NugetListDemo.ViewModels
             var filter = new SearchFilter(false);
             var resource = await source.GetResourceAsync<PackageSearchResource>().ConfigureAwait(false);
             var metadata = await resource.SearchAsync(term, filter, 0, 10, logger, token).ConfigureAwait(false);
-            return metadata.Select(x => new NugetDetailsViewModel(x));
+            return metadata.Select(x =>
+            {
+                var view = new NugetDetailsView();
+                var viewModel = new NugetDetailsViewModel(x);
+                view.DataContext = viewModel;
+                return view;
+            });
         }
     }
 
