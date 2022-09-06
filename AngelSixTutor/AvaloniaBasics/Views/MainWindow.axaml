@@ -3,15 +3,37 @@
         xmlns:vm="using:AvaloniaBasics.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
         x:Class="AvaloniaBasics.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="AvaloniaBasics">
+        Title="AvaloniaBasics" Height="600" Width="400">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Border Padding="10">    
+        <StackPanel>
+
+            <!-- Buttons -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Margin="0 0 10 0" Grid.Column="0" HorizontalAlignment="Stretch" Content="Apply"/>
+                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Reset"/>
+                <Button Margin="10 0 0 0" Grid.Column="2" HorizontalAlignment="Stretch" Content="Refresh"/>  
+            </Grid>
+
+            <TextBlock Text="Pulse Properties" FontWeight="Bold" Margin="0 10" /> 
+
+            <!-- Description -->
+            <TextBlock Text="Description"/> 
+            <TextBox/>
+        </StackPanel>
+    </Border>
+
 
 </Window>
