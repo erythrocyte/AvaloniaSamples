@@ -6,34 +6,136 @@
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
         x:Class="AvaloniaBasics.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="AvaloniaBasics" Height="600" Width="400">
+        Title="AvaloniaBasics" Height="900" Width="400">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
 
-    <Border Padding="10">    
-        <StackPanel>
+  <Border Padding="10">
+    <StackPanel>
 
-            <!-- Buttons -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Button Margin="0 0 10 0" Grid.Column="0" HorizontalAlignment="Stretch" Content="Apply"/>
-                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Reset"/>
-                <Button Margin="10 0 0 0" Grid.Column="2" HorizontalAlignment="Stretch" Content="Refresh"/>  
-            </Grid>
+      <!-- Buttons -->
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Pulse Properties" FontWeight="Bold" Margin="0 10" /> 
+        <Button x:Name="ApplyButton" Click="ApplyButton_Click" Margin="0 0 10 0" Grid.Column="0" HorizontalAlignment="Stretch" Content="Apply"/>
+        <Button x:Name="ResetButton" Click="ResetButton_OnClick" Grid.Column="1" HorizontalAlignment="Stretch" Content="Reset"/>
+        <Button Margin="10 0 0 0" Grid.Column="2" HorizontalAlignment="Stretch" Content="Refresh"/>
+      </Grid>
 
-            <!-- Description -->
-            <TextBlock Text="Description"/> 
-            <TextBox/>
+      <TextBlock Text="Pulse Properties" FontWeight="Bold" Margin="0 10" />
+
+      <!-- Description -->
+      <TextBlock Text="Description"/>
+      <TextBox x:Name="DescriptionText" Padding="2"/>
+
+      <!-- Status and Revision -->
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="2*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Status -->
+        <StackPanel Grid.Column="0" Margin="0 0 10 0">
+          <TextBlock Text="Status"/>
+          <TextBox IsReadOnly="True" Background="#eee" Padding="2"/>
         </StackPanel>
-    </Border>
+
+        <!-- Revision -->
+        <StackPanel Grid.Column="1">
+          <TextBlock Text="Revision"/>
+          <TextBox IsReadOnly="True" Background="#eee" Padding="2"/>
+        </StackPanel>
+      </Grid>
+
+      <!-- Part number -->
+      <TextBlock Text="Part Number"/>
+      <TextBox IsReadOnly="True" Background="#eee" Padding="2"/>
+
+      <!-- Raw Material -->
+      <TextBlock Text="Raw Material" FontWeight="Bold" Margin="0 10" />
+
+      <!-- Material       -->
+      <TextBlock Text="Material"/>
+      <ComboBox Padding="2" HorizontalAlignment="Stretch" />
+
+      <!-- Manufacturing Info -->
+      <TextBlock Text="Manufacturing Information" FontWeight="Bold" Margin="0 10" />
+
+      <!-- Work Centres -->
+      <TextBlock Text="WorkCentres" Margin="0 0 0 10" />
+
+      <!-- CheckBoxes -->
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Column 0 -->
+        <StackPanel Grid.Column="0" Margin="0 0 10 0">
+          <CheckBox x:Name="WeldCheckbox" Checked="Checkbox_OnChecked" Content="Weld" />
+          <CheckBox x:Name="AssemblyCheckbox" Checked="Checkbox_OnChecked" Content="Assembly" />
+          <CheckBox x:Name="PlasmaCheckbox" Checked="Checkbox_OnChecked" Content="Plasma" />
+          <CheckBox x:Name="LaserCheckbox" Checked="Checkbox_OnChecked" Content="Laser" />
+          <CheckBox x:Name="PurchaseCheckbox" Checked="Checkbox_OnChecked" Content="Purchase" />
+        </StackPanel>
+
+        <!-- Column 1 -->
+        <StackPanel Grid.Column="1">
+          <CheckBox x:Name="LatheCheckbox" Content="Lathe" />
+          <CheckBox x:Name="DrillCheckbox" Content="Drill" />
+          <CheckBox x:Name="FoldCheckbox" Content="Fold" />
+          <CheckBox x:Name="RollCheckbox" Content="Roll" />
+          <CheckBox x:Name="SawCheckbox" Content="Saw" />
+        </StackPanel>
+      </Grid>
+
+      <!-- Length -->
+      <TextBlock Text="Length" Margin="0 10 0 10"/>
+      <TextBox x:Name="LengthText" Padding="2"/>
+
+      <!-- Mass -->
+      <TextBlock Text="Mass"/>
+      <TextBox x:Name="MassText" IsReadOnly="True" Background="#eee" Padding="2" Margin="0 0 0 10" />
+
+      <!-- Finish -->
+      <TextBlock Text="Finish"/>
+      <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch" Padding="2" Margin="0 0 0 10">
+        <ComboBoxItem>Painted</ComboBoxItem>
+        <ComboBoxItem>Not Painted</ComboBoxItem>
+      </ComboBox>
+
+      <!-- Purchase -->
+      <TextBlock Text="Purchase Information"/>
+      <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch" Padding="2">
+        <ComboBoxItem>Rubber</ComboBoxItem>
+        <ComboBoxItem>Not Rubber</ComboBoxItem>
+      </ComboBox>
+
+      <!-- Supplier Name -->
+      <TextBlock Text="Supplier Name"/>
+      <TextBox x:Name="SupplierNameText" PropertyChanged="SupplierNameText_OnPropertyChanged" Padding="2"/>
 
 
+      <!-- Supplier Code -->
+      <TextBlock Text="Supplier Code"/>
+      <TextBox Padding="2"/>
+
+
+      <!-- Additional Information -->
+      <TextBlock Text="Additional Information" FontWeight="Bold" Margin="0 10" />
+      
+      <!-- Note -->
+      <TextBlock Text="Note"/>
+      <TextBox Padding="2"/>
+
+    </StackPanel>
+  </Border>   
 </Window>
