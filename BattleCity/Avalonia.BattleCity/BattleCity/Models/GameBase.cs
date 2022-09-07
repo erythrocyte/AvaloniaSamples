@@ -6,11 +6,17 @@ namespace BattleCity.Models;
 public abstract class GameBase
 {
     public const int TicksPerSecond = 60;
+    private readonly DispatcherTimer _timer = new() { Interval = new TimeSpan(0, 0, 0, 0, 1000 / TicksPerSecond) };
+
+    protected GameBase()
+    {
+        _timer.Tick += delegate { DoTick(); };
+    }
+
     public long CurrentTick { get; private set; }
-    private readonly DispatcherTimer _timer = new DispatcherTimer() {Interval = new TimeSpan(0, 0, 0, 0, 1000/TicksPerSecond)};
 
 
-    void DoTick()
+    private void DoTick()
     {
         Tick();
         CurrentTick++;
@@ -18,11 +24,13 @@ public abstract class GameBase
 
     protected abstract void Tick();
 
-    protected GameBase()
+    public void Start()
     {
-        _timer.Tick += delegate { DoTick(); };
+        _timer.IsEnabled = true;
     }
 
-    public void Start() => _timer.IsEnabled = true;
-    public void Stop() => _timer.IsEnabled = false;
+    public void Stop()
+    {
+        _timer.IsEnabled = false;
+    }
 }

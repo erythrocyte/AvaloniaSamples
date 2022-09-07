@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
-namespace BattleCity.Infrastructure;
+namespace BattleCity.Utils.Converters;
 
 public class PropertyChangedBase : INotifyPropertyChanged
 {

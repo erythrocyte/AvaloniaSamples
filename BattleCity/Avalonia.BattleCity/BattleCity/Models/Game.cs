@@ -4,7 +4,7 @@ using Avalonia.Input;
 
 namespace BattleCity.Models;
 
-public class Game: GameBase
+public class Game : GameBase
 {
     private readonly GameField _field;
 
@@ -13,7 +13,7 @@ public class Game: GameBase
         _field = field;
     }
 
-    private Random Random { get; } = new Random();
+    private Random Random { get; } = new();
 
     protected override void Tick()
     {
@@ -28,17 +28,14 @@ public class Game: GameBase
             else if (Keyboard.IsKeyDown(Key.Right))
                 _field.Player.SetTargetFacing(FacingEnum.East);
         }
+
         foreach (var tank in _field.GameObjects.OfType<Tank>())
             if (!tank.IsMoving)
-            {
                 if (!tank.SetTargetFacing(tank.Facing))
-                {
-                    if (!tank.SetTargetFacing((FacingEnum) Random.Next(4)))
+                    if (!tank.SetTargetFacing((FacingEnum)Random.Next(4)))
                         tank.SetTargetFacing(null);
-                }
-            }
 
-        foreach(var obj in _field.GameObjects.OfType<MovingGameObject>())
+        foreach (var obj in _field.GameObjects.OfType<MovingGameObject>())
             obj.MoveToTarget();
     }
 }

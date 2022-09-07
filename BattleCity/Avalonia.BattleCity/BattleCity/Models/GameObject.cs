@@ -1,16 +1,21 @@
 using Avalonia;
-using BattleCity.Infrastructure;
+using BattleCity.Utils.Converters;
 
 namespace BattleCity.Models;
 
-public abstract class GameObject: PropertyChangedBase
+public abstract class GameObject : PropertyChangedBase
 {
     private Point _location;
 
+    protected GameObject(Point location)
+    {
+        Location = location;
+    }
+
     public Point Location
     {
-        get { return _location; }
-        protected set
+        get => _location;
+        set
         {
             if (value.Equals(_location)) return;
             _location = value;
@@ -19,9 +24,4 @@ public abstract class GameObject: PropertyChangedBase
     }
 
     public virtual int Layer => 0;
-
-    protected GameObject(Point location)
-    {
-        Location = location;
-    }
 }
