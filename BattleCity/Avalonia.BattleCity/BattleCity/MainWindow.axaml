@@ -1,0 +1,95 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:BattleCity.Models"
+        xmlns:utilsconverters="clr-namespace:BattleCity.Utils.Converters"
+        mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480"
+        x:Class="BattleCity.MainWindow"
+        Title="BattleCity"
+        Width="640" Height="480"
+        Design.DataContext="{x:Static models:GameField.DesignInstance} ">
+    
+        <Window.Styles >
+                <Style Selector="ItemsControl > ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding Location.X}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Location.Y}"/>
+                        <Setter Property="ZIndex" Value="{Binding Converter={x:Static utilsconverters:ZIndexConverter.Instance }}" />
+      
+                        <Setter Property="Transitions">                            
+                                <Transitions>
+                                        <DoubleTransition  Property="Opacity" Duration="0:0:0:0.5"/>
+                                </Transitions>
+                        </Setter>
+      
+                </Style>
+                <Style Selector="ItemsControl > ContentPresenter.test:pointerover">
+                        <Setter Property="Opacity" Value="0.5"/>
+                </Style>
+        </Window.Styles>
+        
+        <ItemsControl
+                Items="{Binding GameObjects}"
+                Width="{Binding Width, Converter={x:Static utilsconverters:CellToScreenConverter.Instance}, Mode=OneWay}"
+                Height="{Binding Height, Converter={x:Static utilsconverters:CellToScreenConverter.Instance}, Mode=OneWay}">
+    
+    <ItemsControl.ItemsPanel>
+      <ItemsPanelTemplate>
+        <Canvas/>
+      </ItemsPanelTemplate>
+    </ItemsControl.ItemsPanel>
+    
+    <ItemsControl.DataTemplates>
+      <DataTemplate DataType="{x:Type models:TerrainTile}">
+        <Image Width="32" Height="32"
+               Source="{Binding Type, Converter={x:Static utilsconverters:TerrainTileConverter.Instance}}"/>
+      </DataTemplate>
+      
+      <DataTemplate DataType="{x:Type models:Player}">
+        <Border ClipToBounds="False">
+          <Border.Styles>
+            <Style Selector="Border">
+              <Style.Animations>
+                <Animation Duration="0:0:1"
+                           IterationCount="Loop" 
+                           PlaybackDirection="Alternate"
+                           Easing="SineEaseInOut"
+                           FillMode="None">
+                   <KeyFrame Cue="70%">
+                      <Setter Property="ScaleTransform.ScaleX" Value="2"/>
+                      <Setter Property="ScaleTransform.ScaleY" Value="2"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="90%">
+                      <Setter Property="ScaleTransform.ScaleX" Value="2.5"/>
+                      <Setter Property="ScaleTransform.ScaleY" Value="2.5"/>
+                    </KeyFrame>
+                  </Animation>
+                <Animation Duration="0:0:2"
+                           IterationCount="Loop" 
+                           PlaybackDirection="Alternate"
+                           FillMode="None">
+                   <KeyFrame Cue="30%">
+                      <Setter Property="RotateTransform.Angle" Value="-45"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="90%">
+                      <Setter Property="RotateTransform.Angle" Value="45"/>
+                    </KeyFrame>
+                  </Animation>
+
+                </Style.Animations>
+              </Style>
+            </Border.Styles>
+            <Image Width="32" Height="32" 
+                   Source="resm:Avalonia.BattleCity.Resources.Player.png" 
+                   RenderTransform="{Binding Facing, Converter={x:Static utilsconverters:DirectionToMatrixConverter.Instance}}"/>
+          </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type models:Tank}">
+          <Image Width="32" Height="32"
+                 Source="resm:Avalonia.BattleCity.Resources.Tank.png" 
+                 RenderTransform="{Binding Facing, Converter={x:Static utilsconverters:DirectionToMatrixConverter.Instance}}"/>
+        </DataTemplate>
+      </ItemsControl.DataTemplates>
+    </ItemsControl>
+        
+</Window>
