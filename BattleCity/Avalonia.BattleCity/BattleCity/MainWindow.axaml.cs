@@ -9,10 +9,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        
-        var field = new GameField();
-        var game = new Game(field);
-        game.Start();
     }
 
     protected override void OnKeyDown(KeyEventArgs e)

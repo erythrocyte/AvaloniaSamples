@@ -17,6 +17,11 @@ public class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow();
+
+            var field = new GameField();
+            var game = new Game(field);
+            game.Start();
+            desktop.MainWindow.DataContext = field;
         }
 
         base.OnFrameworkInitializationCompleted();
