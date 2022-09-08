@@ -1,9 +1,10 @@
 using Avalonia;
 using BattleCity.Utils.Converters;
+using ReactiveUI;
 
 namespace BattleCity.Models;
 
-public abstract class GameObject : PropertyChangedBase
+public abstract class GameObject : ReactiveObject
 {
     private Point _location;
 
@@ -15,12 +16,7 @@ public abstract class GameObject : PropertyChangedBase
     public Point Location
     {
         get => _location;
-        set
-        {
-            if (value.Equals(_location)) return;
-            _location = value;
-            OnPropertyChanged();
-        }
+        set => this.RaiseAndSetIfChanged(ref _location, value);
     }
 
     public virtual int Layer => 0;

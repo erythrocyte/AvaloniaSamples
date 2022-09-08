@@ -55,14 +55,20 @@ public class GameField : PropertyChangedBase
     {
         if (x / 2 == Width / 4)
             return TerrainTileTypeEnum.Pavement;
-        if (y / 2 == Height / 4) return TerrainTileTypeEnum.Water;
+        
+        if (y / 2 == Height / 4) 
+            return TerrainTileTypeEnum.Water;
 
-        if (x * y == 0) return TerrainTileTypeEnum.StoneWall;
-        if ((x + 1 - Width) * (y + 1 - Height) == 0) return TerrainTileTypeEnum.WoodWall;
-
+        if (x * y == 0) 
+            return TerrainTileTypeEnum.StoneWall;
+        
+        if ((x + 1 - Width) * (y + 1 - Height) == 0) 
+            return TerrainTileTypeEnum.WoodWall;
 
         //if(Random.NextDouble()<0.1) return TerrainTileType.WoodWall;
-        if (Random.NextDouble() < 0.3) return TerrainTileTypeEnum.Forest;
+        if (Random.NextDouble() < 0.3) 
+            return TerrainTileTypeEnum.Forest;
+        
         return TerrainTileTypeEnum.Plain;
     }
 }

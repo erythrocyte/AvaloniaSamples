@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using ReactiveUI;
 
 namespace BattleCity.Models;
 
@@ -23,36 +25,19 @@ public class MovingGameObject : GameObject
     public FacingEnum Facing
     {
         get => _facing;
-        private set
-        {
-            if (value == _facing) return;
-            _facing = value;
-            OnPropertyChanged();
-        }
+        set => this.RaiseAndSetIfChanged(ref _facing, value);
     }
 
     public CellLocation CellLocation
     {
         get => _cellLocation;
-        private set
-        {
-            if (value.Equals(_cellLocation)) return;
-            _cellLocation = value;
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(IsMoving));
-        }
+        private set => this.RaiseAndSetIfChanged(ref _cellLocation, value);
     }
 
     public CellLocation TargetCellLocation
     {
         get => _targetCellLocation;
-        private set
-        {
-            if (value.Equals(_targetCellLocation)) return;
-            _targetCellLocation = value;
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(IsMoving));
-        }
+        private set => this.RaiseAndSetIfChanged(ref _targetCellLocation, value);
     }
 
     public bool IsMoving => TargetCellLocation != CellLocation;

@@ -17,7 +17,9 @@ public class TerrainTileConverter : IValueConverter
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return GetCache()[(TerrainTileTypeEnum)value];
+        var cache = GetCache();
+        var tt_value = (TerrainTileTypeEnum)value;
+        return cache[tt_value];
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -27,12 +29,14 @@ public class TerrainTileConverter : IValueConverter
 
     private Dictionary<TerrainTileTypeEnum, Bitmap> GetCache()
     {
-        return
-            _cache ??
-            (_cache = Enum.GetValues(typeof(TerrainTileTypeEnum)).OfType<TerrainTileTypeEnum>().ToDictionary(t => t,
-                t =>
-                    new Bitmap(
-                        typeof(TerrainTileConverter).GetTypeInfo()
-                            .Assembly.GetManifestResourceStream($"Avalonia.BattleCity.Resources.{t}.png"))));
+        if (_cache is null)
+        {
+            _cache = Enum.GetValues(typeof(TerrainTileTypeEnum)).OfType<TerrainTileTypeEnum>().ToDictionary(t => t, t =>
+                new Bitmap(
+                    typeof(TerrainTileConverter).GetTypeInfo()
+                        .Assembly.GetManifestResourceStream($"BattleCity.Assets.{t}.png")));
+        }
+
+        return _cache;
     }
 }
