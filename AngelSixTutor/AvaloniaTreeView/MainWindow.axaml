@@ -6,7 +6,7 @@
         x:Class="AvaloniaTreeView.MainWindow"
         Opened="TopLevel_OnOpened"
         Title="AvaloniaTreeView">
-    
+
     <Grid>
         <TreeView x:Name="FolderView">
             <TreeView.Styles>
@@ -14,19 +14,26 @@
                     <Setter Property="Template">
                         <ControlTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="avares://images/smallclock.png" Width="16" Margin="3"></Image>
-                                <TextBlock VerticalAlignment="Center" Text="{Binding}"></TextBlock>
-                            </StackPanel>                
+                                <Image Source="Assets/start-here-branding.png"></Image>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </StackPanel>
                         </ControlTemplate>
                     </Setter>
                 </Style>
                 
-                Video \\ 02--21:58
-                <!-- <Style TargetType="{x:Type TreeViewItem}"> -->
-                <!--      -->
+                <!-- <Style Selector="TreeViewItem /template/ ToggleButton#expander:unchecked"> -->
+                <!--     <Setter Property="Template"> -->
+                <!--         <ControlTemplate> -->
+                <!--             <Border Background="Transparent" -->
+                <!--                     HorizontalAlignment="Center" -->
+                <!--                     VerticalAlignment="Top"> -->
+                <!--                 <TextBlock Text="+" /> -->
+                <!--             </Border> -->
+                <!--         </ControlTemplate> -->
+                <!--     </Setter> -->
                 <!-- </Style> -->
-            </TreeView.Styles>        
+            </TreeView.Styles>
         </TreeView>
     </Grid>
-    
+
 </Window>
