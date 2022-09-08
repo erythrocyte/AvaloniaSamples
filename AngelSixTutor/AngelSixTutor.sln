@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaBasics", "AvaloniaBasics\AvaloniaBasics.csproj", "{190790DB-4597-43A7-90AA-33B783CA057E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaTreeView", "AvaloniaTreeView\AvaloniaTreeView.csproj", "{865AEA1E-BF0E-4D4D-9924-111736425427}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{190790DB-4597-43A7-90AA-33B783CA057E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{190790DB-4597-43A7-90AA-33B783CA057E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{190790DB-4597-43A7-90AA-33B783CA057E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{190790DB-4597-43A7-90AA-33B783CA057E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{865AEA1E-BF0E-4D4D-9924-111736425427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{865AEA1E-BF0E-4D4D-9924-111736425427}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{865AEA1E-BF0E-4D4D-9924-111736425427}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{865AEA1E-BF0E-4D4D-9924-111736425427}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
